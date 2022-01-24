@@ -1,0 +1,18 @@
+version: "3.1"
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=1234
+      - AWS_SECRET_ACCESS_KEY=1234
+      - EDGE_PORT=4566
+      - SERVICES=s3
+      - HOSTNAME_EXTERNAL=localhost
+    ports:
+      - "4566:4566"
+      - "4583:4583"
+    volumes:
+      - "${TEMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
